@@ -5,5 +5,5 @@
 <script setup lang="ts">
 import iFrame from '@admin/components/Ruoyi/iFrame/index.vue'
 
-const url = import.meta.env.VITE_ADMIN_API + "/swagger-ui/index.html"
+const url = import.meta.env.VITE_BASE_API + "/swagger-ui/index.html"
 </script>

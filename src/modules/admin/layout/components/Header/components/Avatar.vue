@@ -46,7 +46,7 @@ const PermissionStore = usePermissionStore()
 // 用户信息
 const userInfo: any = computed(() => UserStore.userInfo)
 const person = ref()
-const avatar = computed(() => `${import.meta.env.VITE_ADMIN_API}${userInfo.value.avatar}` || AvatarLogo)
+const avatar = computed(() => `${import.meta.env.VITE_BASE_API}${userInfo.value.avatar}` || AvatarLogo)
 const logOut = async () => {
   ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
     confirmButtonText: '确定',

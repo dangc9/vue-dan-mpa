@@ -47,7 +47,7 @@ function closeDialog() {
 
 /** 预览按钮操作 */
 function handleShow(val: any) {
-  imgSrc.value = `${import.meta.env.VITE_ADMIN_API}/flowable/definition/readImage/${val.id}`
+  imgSrc.value = `${import.meta.env.VITE_BASE_API}/flowable/definition/readImage/${val.id}`
   title.value = `流程图-${val.name}`;
   isDialog.value = true;
 }

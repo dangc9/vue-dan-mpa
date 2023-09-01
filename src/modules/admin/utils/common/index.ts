@@ -6,7 +6,7 @@ import { getToken } from '@admin/utils/auth'
 import router from '@admin/routers/index'
 import request from '@admin/utils/request'
 import { useTagsViewStore } from '@admin/store/modules/tagsView'
-const baseURL = import.meta.env.VITE_ADMIN_API
+const baseURL = import.meta.env.VITE_BASE_API
 
 // 处理上传附件的下载方法
 export function downloadFile(val: any, name?: string, download?: Boolean)  {

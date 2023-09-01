@@ -42,7 +42,7 @@
     // 上传地址
     action: {
       type: String,
-      default: () => `${import.meta.env.VITE_ADMIN_API}/system/file/upload`
+      default: () => `${import.meta.env.VITE_BASE_API}/system/file/upload`
     },
     headers: {
       type: Object,
