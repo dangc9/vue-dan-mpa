@@ -22,14 +22,14 @@ const editorConfig: any = {
       // 自定义上传
       async customUpload(file: File, insertFn: InsertFnType) { 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', `${import.meta.env.VITE_BASE_API}/system/file/upload/url`, true);
+        xhr.open('POST', `${import.meta.env.VITE_ADMIN_API}/system/file/upload/url`, true);
         xhr.setRequestHeader('Authorization', 'Bearer ' + getToken());
         xhr.onload = function() {
           if (xhr.status === 200) {
             // 图片上传成功
             const res = JSON.parse(xhr.responseText);
             console.log(res.msg);
-            const url = import.meta.env.VITE_BASE_API + res.msg
+            const url = import.meta.env.VITE_ADMIN_API + res.msg
             insertFn(url)
           } else {
             ElMessage.error('上传失败');

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { loginForm } from '@/types/login'
+import type { loginForm } from '@admin/types/login'
 import request from '@admin/api/login'
 import { getToken, setToken, removeToken } from '@admin/utils/auth'
 

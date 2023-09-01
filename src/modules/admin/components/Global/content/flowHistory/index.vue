@@ -8,7 +8,7 @@
     instanceId: string | number
   }>()
   const imgUrl = computed(() => {
-    return `${import.meta.env.VITE_BASE_API}/flowable/task/diagram?processDefinitionId=111&processId=${props.instanceId}`
+    return `${import.meta.env.VITE_ADMIN_API}/flowable/task/diagram?processDefinitionId=111&processId=${props.instanceId}`
   })
   watch(() => props.instanceId, async (val) => {
     if (val) {

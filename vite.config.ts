@@ -28,7 +28,7 @@ if(npm_config_page && !entrys[npm_config_page]!) {
 const rollupOptions = npm_config_page ? { [npm_config_page]: entrys[npm_config_page] } : {...entrys, index: resolve(__dirname, 'index.html')};
 
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
-  const { VITE_PORT, VITE_BASE_API, VITE_BASE_PORT } = loadEnv(mode, process.cwd());
+  const { VITE_PORT, VITE_BASE_API, VITE_ADMIN_API } = loadEnv(mode, process.cwd());
   // 多页面代理配置
   const mpaProxy = {}
   const target = `http://localhost:${Number(VITE_PORT)}`;
@@ -112,6 +112,11 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
           target: `http://175.178.70.208/stage-api/`,
           changeOrigin: true,
           rewrite: path => path.replace(new RegExp(VITE_BASE_API), "")
+        },
+        [VITE_ADMIN_API]: {
+          target: `http://175.178.70.208/stage-api/`,
+          changeOrigin: true,
+          rewrite: path => path.replace(new RegExp(VITE_ADMIN_API), "")
         },
         ...mpaProxy,
       }

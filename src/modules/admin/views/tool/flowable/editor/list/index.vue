@@ -29,7 +29,7 @@ const data = reactive({
     name: null,
     category: null,
     headers: { Authorization: "Bearer " + getToken() },
-    url: import.meta.env.VITE_BASE_API + "/flowable/editor/import"
+    url: import.meta.env.VITE_ADMIN_API + "/flowable/editor/import"
   },
   rules: [
 

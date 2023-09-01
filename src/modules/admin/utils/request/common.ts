@@ -10,7 +10,7 @@ declare module "axios" {
 
 // 创建axios实例 进行基本参数配置
 const service = axios.create({
-  baseURL: import.meta.env.VITE_BASE_API,
+  baseURL: import.meta.env.VITE_ADMIN_API,
   timeout: 3000000,
   withCredentials: true
 })
