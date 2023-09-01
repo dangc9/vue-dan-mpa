@@ -1,0 +1,143 @@
+<script lang="ts" setup>
+import { ElMessage, FormInstance } from 'element-plus'
+import { reactive, ref, toRefs } from "vue";
+import { useDict } from "@admin/utils/common/dict";
+import request from '@admin/api/system/dict';
+import to from 'await-to-js';
+
+// 数据标签回显样式
+const listClassOptions = ref([
+  { value: "default", label: "默认" },
+  { value: "primary", label: "主要" },
+  { value: "success", label: "成功" },
+  { value: "info", label: "信息" },
+  { value: "warning", label: "警告" },
+  { value: "danger", label: "危险" }
+]);
+
+const emit = defineEmits(['search'])
+const { sys_normal_disable } = useDict("sys_normal_disable");
+const isLoading = ref(false)
+const ruleFormRef = ref<FormInstance>()
+const dialogVisible = ref<boolean>(false)
+const title = ref('新增')
+
+const data = reactive({
+  ruleForm: defaultForm(),
+  rules: {
+    dictLabel: [{ required: true, message: "数据标签不能为空" }],
+    dictValue: [{ required: true, message: "数据键值不能为空" }],
+    dictSort: [{ required: true, message: "数据顺序不能为空" }]
+  },
+});
+const { ruleForm, rules } = toRefs<any>(data);
+
+function defaultForm() {
+  return {
+    dictCode: undefined,
+    dictLabel: undefined,
+    dictValue: undefined,
+    cssClass: undefined,
+    listClass: "default",
+    dictSort: 0,
+    status: "0",
+    remark: undefined
+  }
+}
+
+function close() {
+  ruleForm.value = defaultForm()
+  ruleFormRef.value.resetFields()
+}
+
+const show = async (item: any = {}) => {
+  if (item.dictCode) {
+    const [err, res] = await to(request.getData(item.dictCode))
+    if (err) return
+    ruleForm.value = res.data
+    title.value = '修改字典数据'
+  } else {
+    ruleForm.value.dictType = item.dictType
+    title.value = '添加字典数据'
+  }
+  dialogVisible.value = true
+}
+
+const handleSubmit = async () => {
+  const validate = await to(ruleFormRef.value.validate())
+  if (!validate[1]) return
+  const type = ruleForm.value.dictCode ? 'updateData' : 'addData'
+  isLoading.value = true
+  const [err, res] = await to(request[type](ruleForm.value))
+  isLoading.value = false
+  if (err) return
+  ElMessage.success(res.msg)
+  dialogVisible.value = false
+  emit('search')
+}
+
+defineExpose({
+  show,
+})
+</script>
+
+<template>
+  <el-dialog @close="close" v-model="dialogVisible" :title="title" width="600px" class="d-dialog" draggable>
+    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="100px" class="d-edit-form mr-10">
+      <el-row :gutter="10">
+        <el-col :lg="24" :span="24">
+          <el-form-item label="字典类型">
+            <el-input v-model="ruleForm.dictType" disabled />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="24" :span="24">
+          <el-form-item label="数据标签" prop="dictLabel">
+            <el-input v-model="ruleForm.dictLabel" placeholder="请输入数据标签" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="24" :span="24">
+          <el-form-item label="数据键值" prop="dictValue">
+            <el-input v-model="ruleForm.dictValue" placeholder="请输入数据键值" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="24" :span="24">
+          <el-form-item label="样式属性" prop="cssClass">
+            <el-input v-model="ruleForm.cssClass" placeholder="请输入样式属性" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="24" :span="24">
+          <el-form-item label="显示排序" prop="dictSort">
+            <el-input-number v-model="ruleForm.dictSort" controls-position="right" :min="0" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="24" :span="24">
+          <el-form-item label="回显样式" prop="listClass">
+            <el-select v-model="ruleForm.listClass">
+              <el-option v-for="item in listClassOptions" :key="item.value" :label="item.label + '(' + item.value + ')'"
+                :value="item.value"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :lg="24" :span="24">
+          <el-form-item label="状态" prop="status">
+            <el-radio-group v-model="ruleForm.status">
+              <el-radio v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.value">{{ dict.label
+              }}</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </el-col>
+        <el-col :lg="24" :span="24">
+          <el-form-item label="备注" prop="remark">
+            <el-input v-model="ruleForm.remark" type="textarea" placeholder="请输入内容"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="handleSubmit()" :loading="isLoading">确定</el-button>
+      </span>
+    </template>
+  </el-dialog>
+</template>
