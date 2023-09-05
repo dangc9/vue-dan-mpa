@@ -1,8 +1,73 @@
+<script setup lang="ts">
+import { ref, computed, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { usePermissionStore } from "@admin/store/modules/permission"
+import { useSettingStore } from "@admin/store/modules/setting";
+import Footer from '../components/Footer/index.vue'
+import SubMenu from '../components/SubMenu/SubMenu.vue'
+import TagsView from '../components/TagsView/index.vue'
+import HeaderToolRight from '../components/Header/ToolRight.vue'
+import HeaderToolLeft from '../components/Header/ToolLeft.vue'
+import Main from '../components/Main/index.vue'
+
+const SYS_NAME = import.meta.env.VITE_SYS_NAME
+const PermissionStore = usePermissionStore()
+const SettingStore = useSettingStore()
+const route = useRoute()
+const router = useRouter();
+// 获取路由
+const permission_routes = computed(() => PermissionStore.permission_routes)
+
+// 获取路由
+const menusRoutes = computed(() => {
+  return PermissionStore.permission_routes.filter(item => !item.hidden)
+})
+
+const activeCurrentMenu = ref('')
+// 主题配置
+const themeConfig = computed(() => SettingStore.themeConfig)
+const isCollapse = computed(() => !SettingStore.isCollapse)
+const activeMenu = computed(() => {
+  const { meta, path } = route
+  return path
+})
+const subMenus = ref([])
+
+watch(() => [route], () => {
+  if (!menusRoutes.value.length) return;
+  const [firstMenu] = route.matched
+  activeCurrentMenu.value = firstMenu.path;
+  let menuItem = menusRoutes.value.find(item => firstMenu.path === item.path)
+  if (menuItem && menuItem.children?.length) {
+    subMenus.value = menuItem.children
+  }
+}, {
+  deep: true,
+  immediate: true
+})
+
+const handleChangeMenu = (item) => {
+  const lastRoute = getFirstRoute(item)
+  if(lastRoute.meta.link) {
+    window.open(lastRoute.meta.link)
+    return
+  }
+  router.push(lastRoute.path)
+  function getFirstRoute(route) {
+    if (route.children?.length) {
+      return getFirstRoute(route.children[0])
+    } else {
+      return route
+    }
+  }
+}
+</script>
+
 <template>
   <div class="main-columns">
     <div class="layout-columns-aside">
       <div class="logo flex-center">
-        <img src="@admin/assets/image/logo.png" alt="logo" />
+        <img src="@admin/assets/image/log.png" alt="logo" />
       </div>
       <el-scrollbar>
         <div class="menu-wrap">
@@ -46,64 +111,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, computed, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { usePermissionStore } from "@admin/store/modules/permission"
-import { useSettingStore } from "@admin/store/modules/setting";
-import Footer from '../components/Footer/index.vue'
-import SubMenu from '../components/SubMenu/SubMenu.vue'
-import TagsView from '../components/TagsView/index.vue'
-import HeaderToolRight from '../components/Header/ToolRight.vue'
-import HeaderToolLeft from '../components/Header/ToolLeft.vue'
-import Main from '../components/Main/index.vue'
-
-const SYS_NAME = import.meta.env.VITE_SYS_NAME
-const PermissionStore = usePermissionStore()
-const SettingStore = useSettingStore()
-const route = useRoute()
-const router = useRouter();
-// 获取路由
-const permission_routes = computed(() => PermissionStore.permission_routes)
-
-// 获取路由
-const menusRoutes = computed(() => {
-  return PermissionStore.permission_routes.filter(item => !item.hidden)
-})
-
-const activeCurrentMenu = ref('')
-// 主题配置
-const themeConfig = computed(() => SettingStore.themeConfig)
-const isCollapse = computed(() => !SettingStore.isCollapse)
-const activeMenu = computed(() => {
-  const { meta, path } = route
-  return path
-})
-const basePath = ref<string>('/')
-const subMenus = ref([])
-
-watch(() => [route], () => {
-  if (!menusRoutes.value.length) return;
-  const [firstMenu] = route.matched
-  activeCurrentMenu.value = firstMenu.path;
-  let menuItem = menusRoutes.value.find(item => firstMenu.path === item.path)
-  if (menuItem && menuItem.children?.length) {
-    subMenus.value = menuItem.children
-  } else {
-    subMenus.value = []
-  }
-  basePath.value = firstMenu.path
-}, {
-  deep: true,
-  immediate: true
-})
-
-const handleChangeMenu = (item) => {
-  router.push(item.path);
-}
-</script>
-
 
 <style lang="scss" scoped>
 .main-columns {

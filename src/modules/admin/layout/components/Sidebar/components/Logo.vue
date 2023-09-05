@@ -2,7 +2,7 @@
   <div class="sidebar-logo-container">
     <transition name="sidebarLogoFadeCl">
       <router-link v-if="isCollapse" key="collapse" class="sidebar-logo-link flex items-center" to="/">
-        <img src="@admin/assets/image/logo/logo.png" class="sidebar-logo ml-4">
+        <img src="@admin/assets/image/logo/log.png" class="sidebar-logo ml-4">
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link flex items-center" to="/">
         <img src="@admin/assets/image/log.png" class="sidebar-logo ml-5">
