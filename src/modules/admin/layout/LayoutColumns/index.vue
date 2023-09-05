@@ -15,8 +15,6 @@ const PermissionStore = usePermissionStore()
 const SettingStore = useSettingStore()
 const route = useRoute()
 const router = useRouter();
-// 获取路由
-const permission_routes = computed(() => PermissionStore.permission_routes)
 
 // 获取路由
 const menusRoutes = computed(() => {
@@ -28,8 +26,7 @@ const activeCurrentMenu = ref('')
 const themeConfig = computed(() => SettingStore.themeConfig)
 const isCollapse = computed(() => !SettingStore.isCollapse)
 const activeMenu = computed(() => {
-  const { meta, path } = route
-  return path
+  return route.path
 })
 const subMenus = ref([])
 
