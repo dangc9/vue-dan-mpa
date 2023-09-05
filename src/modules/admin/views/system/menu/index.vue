@@ -104,7 +104,7 @@ function toggleExpandAll() {
         <el-table-column prop="orderNum" label="排序" align="center"  width="60"></el-table-column>
         <el-table-column prop="perms" label="权限标识" :show-overflow-tooltip="true" width="200"></el-table-column>
         <el-table-column prop="component" label="组件路径" :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column label="是否缓存" align="center"  width="80">
+        <el-table-column label="是否缓存" align="center"  width="90">
           <template #default="{ row }">
             <el-tag v-if="row.menuType === 'C'" :type="row.isCache == '0' ? 'success' : 'info'">{{ row.isCache == '0' ? '缓存' : '不缓存' }}</el-tag>
           </template>

@@ -109,7 +109,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       https: false,
       proxy: {
         [VITE_BASE_API]: {
-          target: `http://175.178.70.208/api/`,
+          target: `http://175.178.70.208/admin-api/`,
           changeOrigin: true,
           rewrite: path => path.replace(new RegExp(VITE_BASE_API), "")
         },

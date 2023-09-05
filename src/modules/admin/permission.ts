@@ -42,6 +42,7 @@ router.beforeEach(async (to, from, next) => {
             // 动态添加访问路由表
             router.addRoute(item)
           })
+          PermissionStore.setCacheRoutes(router.getRoutes())
           next({ ...to, replace: true })
         } else {
           next() 

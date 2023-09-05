@@ -1,5 +1,10 @@
 import { defineStore } from 'pinia'
 import router from "@admin/routers/index";
+const visitedViews = JSON.parse(sessionStorage.getItem("pcs_visited_tablist")) || []
+
+const setVisitedViews = function(val: any) {
+  sessionStorage.setItem("pcs_visited_tablist", JSON.stringify(val));
+}
 
 export const useTagsViewStore = defineStore({
   // id: 必须的，在所有 Store 中唯一
@@ -7,7 +12,7 @@ export const useTagsViewStore = defineStore({
   // state: 返回对象的函数
   state: () => ({
     activeTabsValue: '/home',
-    visitedViews: [],
+    visitedViews: visitedViews,
     cachedViews: [],
 
   }),
@@ -20,25 +25,18 @@ export const useTagsViewStore = defineStore({
     addView(view) {
       this.addVisitedView(view)
     },
-    removeView(routes) {
-      return new Promise((resolve, reject) => {
-        this.visitedViews = this.visitedViews.filter(item => !routes.includes(item.path))
-        resolve(null)
-      })
-    },
     addVisitedView(view) {
       this.setTabsMenuValue(view.path);
-      console.log(view);
       if (this.visitedViews.some(v => v.path === view.path)) return
-
       this.visitedViews.push(
         Object.assign({}, view, {
           title: view.meta.title || 'no-name'
         })
       )
-      if (!view.meta.noCache) {
-        this.cachedViews.push(view.name)
-      }
+      setVisitedViews(this.visitedViews)
+      // if (!view.meta.noCache) {
+      //   this.cachedViews.push(view.name)
+      // }
     },
     delView(activeTabPath) {
       return new Promise(resolve => {
@@ -63,6 +61,7 @@ export const useTagsViewStore = defineStore({
         this.visitedViews = this.visitedViews.filter(v => {
           return (v.path !== path || v.meta.affix)
         })
+        setVisitedViews(this.visitedViews)
         this.cachedViews = this.cachedViews.filter(v => {
           return (v.path !== path || v.meta.affix)
         })
@@ -84,6 +83,7 @@ export const useTagsViewStore = defineStore({
     delAllViews() {
       return new Promise((resolve) => {
         this.visitedViews = this.visitedViews.filter(v => v.meta.affix)
+        setVisitedViews(this.visitedViews)
         this.cachedViews = this.visitedViews.filter(v => v.meta.affix)
         resolve([...this.visitedViews])
       })
@@ -95,19 +95,12 @@ export const useTagsViewStore = defineStore({
       this.cachedViews = this.visitedViews.filter(item => {
         return item.path === path || item.meta.affix;
       });
+      setVisitedViews(this.visitedViews)
     },
     goHome() {
       this.activeTabsValue = '/home';
       router.push({ path: '/home' });
     },
-    updateVisitedView(view) {
-      for (let v of this.visitedViews) {
-        if (v.path === view.path) {
-          v = Object.assign(v, view)
-          break
-        }
-      }
-    }
   },
 
 })

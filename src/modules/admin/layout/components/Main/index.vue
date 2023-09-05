@@ -14,10 +14,11 @@
   import {useWrapComponents} from '@admin/hooks/useWrapComponents'
   import { computed, ref } from 'vue'
   import {useSettingStore} from "@admin/store/modules/setting"
-  import { useTagsViewStore } from "@admin/store/modules/tagsView"
+  import { usePermissionStore } from "@admin/store/modules/permission"
+
   const SettingStore = useSettingStore()
-  const TagsViewStore = useTagsViewStore()
-  const cacheRoutes = computed(() =>TagsViewStore.cachedViews)
+  const PermissionStore = usePermissionStore()
+  const cacheRoutes = computed(() => PermissionStore.cacheRoutes)
   const isReload = computed(() => SettingStore.isReload)
 </script>
 

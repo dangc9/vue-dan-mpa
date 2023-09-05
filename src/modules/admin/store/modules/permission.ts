@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import Layout from '@admin/layout/index.vue'
 import { asyncRoutes, constantRoutes, notFoundRouter } from '@admin/routers/index'
+import { RouteRecordRaw } from 'vue-router';
 import auth from '@admin/utils/common/auth'
 import to from 'await-to-js'
 import request from '@admin/api/login'
@@ -17,7 +18,7 @@ export const usePermissionStore = defineStore({
     // 动态路由
     addRoutes: [],
     // 缓存路由
-    cacheRoutes: {},
+    cacheRoutes: [],
   }),
   getters: {
     permission_routes: state => {
@@ -60,8 +61,11 @@ export const usePermissionStore = defineStore({
       this.addRoutes = []
       this.cacheRoutes = []
     },
+    setCacheRoutes(routes: RouteRecordRaw[]) {
+      this.cacheRoutes = routes.filter(item => item.name && item.meta.noCache === false).map(a => a.name)
+      return this.cacheRoutes
+    }
   },
-
 })
 
 // / 遍历后台传来的路由字符串，转换为组件对象
