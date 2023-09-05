@@ -14,7 +14,7 @@ export function useDict(...args: string[]) {
         res.value[type] = dicts;
       } else {
         request.getDicts(type).then(resp => {
-          res.value[type] = resp.data.data?.map(p => ({ 
+          res.value[type] = resp.data?.map(p => ({ 
             label: p.dictLabel, 
             value: p.dictValue === 'undefined' ? undefined : p.dictValue, 
             elTagType: p.listClass, 

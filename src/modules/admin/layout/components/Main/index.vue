@@ -2,8 +2,8 @@
   <div class="app-main" >
     <router-view v-slot="{ Component, route }">
       <transition name="fade-slide" mode="out-in" appear>
-        <keep-alive :include="cacheRoutes" v-if="isReload">
-          <component :is="useWrapComponents(Component,route)" :key="route.path" />
+        <keep-alive :include="cacheRoutes"  v-if="isReload">
+          <component :is="useWrapComponents(Component,route)" :key="route.fullPath" />
         </keep-alive>
       </transition>
     </router-view>
@@ -14,10 +14,10 @@
   import {useWrapComponents} from '@admin/hooks/useWrapComponents'
   import { computed, ref } from 'vue'
   import {useSettingStore} from "@admin/store/modules/setting"
-  import {usePermissionStore} from "@admin/store/modules/permission"
+  import { useTagsViewStore } from "@admin/store/modules/tagsView"
   const SettingStore = useSettingStore()
-  const PermissionStore = usePermissionStore()
-  const cacheRoutes = computed(() =>PermissionStore.keepAliveRoutes)
+  const TagsViewStore = useTagsViewStore()
+  const cacheRoutes = computed(() =>TagsViewStore.cachedViews)
   const isReload = computed(() => SettingStore.isReload)
 </script>
 

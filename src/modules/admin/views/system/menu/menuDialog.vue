@@ -82,7 +82,7 @@ function getTreeselect() {
   menuOptions.value = [];
   request.listMenu().then(response => {
     const menu = { menuId: 0, menuName: "主类目", children: [] };
-    menu.children = handleTree(response.data.data, "menuId");
+    menu.children = handleTree(response.data, "menuId");
     menuOptions.value.push(menu);
   });
 }

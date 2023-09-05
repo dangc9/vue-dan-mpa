@@ -1,9 +1,7 @@
 import { defineStore } from 'pinia'
 import Layout from '@admin/layout/index.vue'
 import { asyncRoutes, constantRoutes, notFoundRouter } from '@admin/routers/index'
-// import { hasPermission, filterAsyncRoutes } from "@admin/utils/routers"
 import auth from '@admin/utils/common/auth'
-import { filterKeepAlive } from "@admin/utils/routers";
 import to from 'await-to-js'
 import request from '@admin/api/login'
 import { join } from 'path-browserify'
@@ -25,9 +23,6 @@ export const usePermissionStore = defineStore({
     permission_routes: state => {
       return state.routes
     },
-    keepAliveRoutes: state => {
-      return filterKeepAlive(asyncRoutes)
-    }
   },
   // 可以同步 也可以异步
   actions: {
@@ -65,10 +60,6 @@ export const usePermissionStore = defineStore({
       this.addRoutes = []
       this.cacheRoutes = []
     },
-    getCacheRoutes() {
-      this.cacheRoutes = filterKeepAlive(asyncRoutes)
-      return this.cacheRoutes
-    }
   },
 
 })

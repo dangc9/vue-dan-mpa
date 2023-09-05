@@ -28,6 +28,7 @@ export const useTagsViewStore = defineStore({
     },
     addVisitedView(view) {
       this.setTabsMenuValue(view.path);
+      console.log(view);
       if (this.visitedViews.some(v => v.path === view.path)) return
 
       this.visitedViews.push(
@@ -35,10 +36,9 @@ export const useTagsViewStore = defineStore({
           title: view.meta.title || 'no-name'
         })
       )
-      if (view.meta.keepAlive) {
+      if (!view.meta.noCache) {
         this.cachedViews.push(view.name)
       }
-
     },
     delView(activeTabPath) {
       return new Promise(resolve => {
