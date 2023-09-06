@@ -136,5 +136,5 @@ const submitForm = async () => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/login/index";
+@import "@admin/styles/login/index";
 </style>

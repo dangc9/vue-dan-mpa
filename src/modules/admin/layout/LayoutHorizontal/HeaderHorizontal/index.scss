@@ -9,7 +9,7 @@
     width: 100%;
     border-bottom: 1px solid #eee;
     display: flex;
-    background-color:$menuBg;
+    background-color: #304156;
     align-items: center;
     padding: 0 10px 0 0;
     box-sizing: border-box;
@@ -28,6 +28,9 @@
   overflow: hidden;
   height: 100%;
   margin-right:20px;
+  border: none;
+  height: 100%;
+  background: none;
   :deep(.el-menu-item){
     height: 100%;
   }

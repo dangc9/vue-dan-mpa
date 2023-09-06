@@ -66,7 +66,6 @@
     .el-menu {
       border: none;
       height: 100%;
-      width: 100% !important;
       background: none;
     }
 
@@ -79,16 +78,32 @@
     }
 
     .is-active > .el-sub-menu__title {
-      color: $subMenuActiveText !important;
+      color: $menuText !important;
     }
-
+    
     & .nest-menu .el-sub-menu > .el-sub-menu__title,
     & .el-sub-menu .el-menu-item {
-      min-width: $sideBarWidth !important;
+      min-width: $sideBarWidth;
       background-color: $subMenuBg !important;
-
-      &:hover {
-        background-color: $subMenuHover !important;
+    }
+    & .el-menu-item, .el-sub-menu__title {
+      color: $menuText;
+    }
+    & .el-menu-item.is-active, & .el-menu-item:hover {
+      position: relative;
+      background-color: transparent;
+      color: $menuActiveText;
+      &::before {
+        position: absolute;
+        inset: 0 8px;
+        margin: 4px 0;
+        clear: both;
+        content: "";
+        background: var(--el-color-primary) !important;
+        border-radius: 3px;
+      }
+      span {
+        z-index: 1;
       }
     }
   }
@@ -97,11 +112,9 @@
     .sidebar-container {
       width: 60px !important;
     }
-
     .main-container {
       margin-left: 60px;
     }
-
     .sub-menu-title-noDropdown {
       padding: 0 !important;
       position: relative;
@@ -196,15 +209,6 @@
         margin-left: -2px;
       }
     }
-
-    .nest-menu .el-sub-menu > .el-sub-menu__title,
-    .el-menu-item {
-      &:hover {
-        // you can use $subMenuHover
-        background-color: $menuHover !important;
-      }
-    }
-
     // the scroll bar appears when the subMenu is too long
     > .el-menu--popup {
       max-height: 100vh;
@@ -225,4 +229,3 @@
     }
   }
 }
-

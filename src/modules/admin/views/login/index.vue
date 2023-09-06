@@ -15,9 +15,9 @@
 <script lang="ts" setup>
   import {ref} from 'vue'
   import LoginForm from './components/LoginForm.vue'
-  import SwitchDark from '@admin/components/Layout/SwitchDark/index.vue'
+  import SwitchDark from '@admin/components/Layout/Theme/components/SwitchDark.vue'
   const accountLogin = ref<boolean>(true)
 </script>
 <style lang="scss" scoped>
-  @import "@/styles/login/index";
+  @import "@admin/styles/login/index";
 </style>

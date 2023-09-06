@@ -4,12 +4,9 @@
     <el-scrollbar wrap-class="scrollbar-wrapper" class="sidebar-menu-tree">
       <el-menu
           :default-active="activeMenu"
-          background-color="#304156"
-          text-color="#bfcbd9"
           :unique-opened="SettingStore.themeConfig.uniqueOpened"
           :collapse-transition="false"
-          :collapse="isCollapse"
-      >
+          :collapse="isCollapse">
         <SubMenu :menuList="permission_routes"/>
       </el-menu>
     </el-scrollbar>

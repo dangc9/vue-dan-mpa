@@ -2,7 +2,7 @@
   <div class="sidebar-logo-container">
     <transition name="sidebarLogoFadeCl">
       <router-link v-if="isCollapse" key="collapse" class="sidebar-logo-link flex items-center" to="/">
-        <img src="@admin/assets/image/logo/log.png" class="sidebar-logo ml-4">
+        <img src="@admin/assets/image/log.png" class="sidebar-logo ml-4">
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link flex items-center" to="/">
         <img src="@admin/assets/image/log.png" class="sidebar-logo ml-5">
@@ -30,7 +30,7 @@ const SYS_NAME = import.meta.env.VITE_SYS_NAME
     width: 100%;
     height: 50px;
     line-height: 50px;
-    background: #2b2f3a;
+    background: $menuBg;
     text-align: center;
     overflow: hidden;
 
@@ -47,7 +47,7 @@ const SYS_NAME = import.meta.env.VITE_SYS_NAME
       & .sidebar-title {
         display: inline-block;
         margin: 0;
-        color: #fff;
+        color: $menuText;
         font-weight: 600;
         margin-left: 9px;
         line-height: 50px;

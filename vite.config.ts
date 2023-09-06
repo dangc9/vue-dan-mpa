@@ -87,7 +87,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@use "./src/styles/index.scss" as *;`
+          additionalData: `@use "./src/modules/admin/styles/variablesSass.scss" as *;`
         }
       }
     },

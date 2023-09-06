@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { PRIMARY_COLOR } from "@admin/config";
+import { PRIMARY_COLOR,  } from "@admin/config";
 
 const defaultThemeConfig = {
   // 显示设置
@@ -25,7 +25,11 @@ const defaultThemeConfig = {
   // 灰色模式
   gray: false,
   // 色弱模式
-  weak: false
+  weak: false,
+  // 风格切换
+  style: 'dark',
+  // 风格颜色
+  styleColor: '#282c34',
 }
 export const useSettingStore = defineStore({
   // id: 必须的，在所有 Store 中唯一

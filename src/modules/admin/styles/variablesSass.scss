@@ -12,26 +12,21 @@ $panGreen: #30b08f;
 $primaryColor: var(--el-color-primary);
 
 // sidebar
-$menuText: #bfcbd9;
-$menuActiveText: #409eff;
-$subMenuActiveText: #f4f4f5;
+$menuText: var(--d-sidebar-color);
+$menuActiveText: var(--d-sidebar-active-color);
 
-$menuBg: #304156;
-$menuHover: #263445;
 
-$subMenuBg: #1f2d3d;
-$subMenuHover: #001528;
+$menuBg: var(--d-sidebar-bg);
+$menuHover: var(--d-sidebar-bg-light-1);
+$subMenuBg: var(--d-sidebar-bg-light-2);
 
 $sideBarWidth: 210px;
 
 :export {
   menuText: $menuText;
-  menuActiveText: $menuActiveText;
-  subMenuActiveText: $subMenuActiveText;
   menuBg: $menuBg;
   menuHover: $menuHover;
   subMenuBg: $subMenuBg;
-  subMenuHover: $subMenuHover;
   sideBarWidth: $sideBarWidth;
   primaryColor: $primaryColor;
 }

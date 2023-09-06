@@ -1,4 +1,4 @@
-import "@/styles/tailwind/index.scss" 
+import "@admin/styles/tailwind/index.scss" 
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './routers'
@@ -18,8 +18,9 @@ import 'element-plus/dist/index.css'
 // 引入暗黑模式 element-plus 2.2 内置暗黑模式
 import 'element-plus/theme-chalk/dark/css-vars.css'
 // 自定义暗黑模式
-import "@/styles/element-dark.scss";
-import "@/styles/public/index.scss";
+import "@admin/styles/element-dark.scss";
+import "@admin/styles/public/index.scss";
+import "@admin/styles/index.scss";
 // 引入阿里图标库
 import "@admin/assets/iconfont/iconfont.css";
 import "@admin/assets/iconfont/iconfont.js";

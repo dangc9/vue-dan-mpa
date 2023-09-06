@@ -121,8 +121,8 @@ const handleChangeMenu = (item) => {
   flex-shrink: 0;
   width: 80px;
   height: 100%;
-  background-color: #304156;
-
+  background-color: $menuBg;
+  border-right: 1px solid var(--el-border-color);
   .el-scrollbar {
     height: calc(100% - 55px);
   }
@@ -152,6 +152,7 @@ const handleChangeMenu = (item) => {
       width: 70px;
       cursor: pointer;
       transition: all .3s ease;
+      color: $menuText;
     }
 
     .active-menu {
@@ -159,13 +160,13 @@ const handleChangeMenu = (item) => {
       border-radius: 5px;
     }
 
-    .title {
-      color: #e5eaf3;
-    }
+    // .title {
+    //   color: #e5eaf3;
+    // }
 
-    .el-icon {
-      color: #e5eaf3;
-    }
+    // .el-icon {
+    //   color: #e5eaf3;
+    // }
   }
 }
 
