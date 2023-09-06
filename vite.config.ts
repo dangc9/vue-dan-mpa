@@ -109,12 +109,12 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       https: false,
       proxy: {
         [VITE_BASE_API]: {
-          target: `http://175.178.70.208/admin-api/`,
+          target: `http://vue.ruoyi.vip/prod-api/`,
           changeOrigin: true,
           rewrite: path => path.replace(new RegExp(VITE_BASE_API), "")
         },
         [VITE_ADMIN_API]: {
-          target: `http://175.178.70.208/admin-api/`,
+          target: `http://vue.ruoyi.vip/prod-api/`,
           changeOrigin: true,
           rewrite: path => path.replace(new RegExp(VITE_ADMIN_API), "")
         },
