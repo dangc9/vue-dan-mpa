@@ -1,4 +1,4 @@
-import request from '@/utils/request/common'
+import request from '@admin/utils/request/common'
 
 class requests {
   static getDetail(id: string | number) {

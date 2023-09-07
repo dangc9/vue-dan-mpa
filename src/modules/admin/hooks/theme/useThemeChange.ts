@@ -33,7 +33,6 @@ export function useThemeChange() {
       setPropertyPrimary("light", i, primary_color);
     }
     const brightness = getColorBrightness(primary_color);
-    console.log(brightness);
     document.documentElement.style.setProperty("--d-sidebar-active-color", brightness > 150 ? '#000000' : '#ffffff');
     changeSwitch('primary',primary_color)
   }

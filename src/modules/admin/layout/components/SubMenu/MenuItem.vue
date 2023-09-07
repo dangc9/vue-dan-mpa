@@ -3,7 +3,7 @@
              :index="subItem.path"
              @click="handleClickMenu(subItem)">
     <el-icon>
-      <component :is="subItem.meta?.icon === '#' ? 'Grid' :subItem.meta?.icon"></component>
+      <component :is="getIconComponent(subItem.meta?.icon)"></component>
     </el-icon>
     <!-- <svg-icon :icon-class="subItem?.meta?.icon" /> -->
     <template #title>
@@ -13,11 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, getCurrentInstance  } from "vue";
+import { getCurrentInstance  } from "vue";
 import { useRouter } from "vue-router";
-function isExternal(path) {
-  return /^(https?:|mailto:|tel:)/.test(path)
-}
 
 const router = useRouter();
 let props = defineProps({
@@ -30,10 +27,11 @@ let props = defineProps({
     default:()=>{}
   },
 })
-const isComponentRegistered = (name: string) => {
-  const app = getCurrentInstance().appContext.config.globalProperties;
-  // console.log(app);
-  // return app.component(name) !== undefined;
+
+const getIconComponent = (name: string) => {
+  if(name === '#') return 'Grid'
+  const app = getCurrentInstance().appContext.components[name.charAt(0).toUpperCase() + name.slice(1)]
+  return app ? name : 'Grid'
 }
 
 const handleClickMenu = (subItem) => {

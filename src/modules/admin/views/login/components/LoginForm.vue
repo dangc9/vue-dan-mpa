@@ -79,14 +79,14 @@ const rules = reactive({
   code: [{ required: true, message: "请输入验证码 " }],
 })
 
-const username = Cookies.get("oa_username");
-const password = Cookies.get("oa_password");
-const rememberMe = Cookies.get('oa_rememberMe') || false;
+const username = Cookies.get("d_login_username");
+const password = Cookies.get("d_login_password");
+const rememberMe = Cookies.get('d_login_rememberMe') || false;
 
 // 表单数据
 const ruleForm = reactive<loginForm>({
-  username: decrypt(username),
-  password: decrypt(password),
+  username: decrypt(username) || 'admin',
+  password: decrypt(password) || 'admin123',
   code: '',
   uuid: '',
   rememberMe: Boolean(rememberMe)
@@ -113,13 +113,13 @@ const submitForm = async () => {
   const validate = await to(ruleFormRef.value?.validate())
   if (!validate[1]) return
   if (ruleForm.rememberMe) {
-    Cookies.set("oa_username", encrypt(ruleForm.username), { expires: 30 });
-    Cookies.set("oa_password", encrypt(ruleForm.password), { expires: 30 });
-    Cookies.set("oa_rememberMe", ruleForm.password, { expires: 30 });
+    Cookies.set("d_login_username", encrypt(ruleForm.username), { expires: 30 });
+    Cookies.set("d_login_password", encrypt(ruleForm.password), { expires: 30 });
+    Cookies.set("d_login_rememberMe", ruleForm.password, { expires: 30 });
   } else {
-    Cookies.remove("oa_username");
-    Cookies.remove("oa_password");
-    Cookies.remove('oa_rememberMe');
+    Cookies.remove("d_login_username");
+    Cookies.remove("d_login_password");
+    Cookies.remove('d_login_rememberMe');
   }
   const data = JSON.parse(JSON.stringify(ruleForm))
   // data.password = crypto.encrypt(data.password, 'degongdenglumima')

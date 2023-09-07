@@ -9,7 +9,7 @@
       <el-sub-menu v-else :index="subItem.path">
         <template #title>
           <el-icon>
-            <component :is="subItem.meta?.icon === '#' ? 'Grid' : subItem.meta?.icon"></component>
+            <component :is="getIconComponent(subItem.meta?.icon)"></component>
           </el-icon>
           <span>{{ subItem?.meta?.title }}</span>
         </template>
@@ -20,12 +20,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, getCurrentInstance } from "vue";
 import MenuItem from './MenuItem.vue'
 
 defineProps<{
   menuList: any[]
 }>()
+
+const getIconComponent = (name: string) => {
+  if(name === '#') return 'Grid'
+  const app = getCurrentInstance().appContext.components[name.charAt(0).toUpperCase() + name.slice(1)]
+  return app ? name : 'Grid'
+}
 
 const hasOneChild = (children = [], parent) => {
   const showingChildren = children.filter((item) => {
