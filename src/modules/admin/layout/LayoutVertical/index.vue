@@ -2,9 +2,9 @@
   <!--纵向布局-->
   <Sidebar/>
   <div class="main-container">
-      <HeaderVertical/>
-      <Main/>
-      <Footer/>
+  <HeaderVertical/>
+  <Main/>
+  <Footer/>
   </div>
 </template>
 
@@ -30,17 +30,17 @@ import Footer from '../components/Footer/index.vue'
     top: 0;
   }
 }
-.sidebar-container {
-  display: flex;
-  flex-direction: column;
-}
-.drawer-bg {
-  background: #000;
-  opacity: 0.3;
-  width: 100%;
-  top: 0;
-  height: 100%;
-  position: absolute;
-  z-index: 90;
-}
+// .sidebar-container {
+//   display: flex;
+//   flex-direction: column;
+// }
+// .drawer-bg {
+//   background: #000;
+//   opacity: 0.3;
+//   width: 100%;
+//   top: 0;
+//   height: 100%;
+//   position: absolute;
+//   z-index: 90;
+// }
 </style>
