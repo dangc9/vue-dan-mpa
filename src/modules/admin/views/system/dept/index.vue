@@ -71,7 +71,7 @@ function toggleExpandAll() {
 
 <template>
   <div class="app-container">
-    <div class="header">
+    <div class="d-header">
       <el-form :inline="true" :model="searchForm" class="demo-form-inline">
         <el-form-item label="部门名称" prop="deptName">
           <el-input v-model="searchForm.deptName" placeholder="请输入部门名称" @keyup.enter="getList()" />
@@ -87,7 +87,7 @@ function toggleExpandAll() {
         </el-form-item>
       </el-form>
     </div>
-    <div class="footer">
+    <div class="d-content">
       <div class="util">
         <el-button type="primary" @click="addHandler" icon="CirclePlus" v-hasPermi="['system:dept:add']">新增部门</el-button>
         <el-button type="info" plain :icon=" !isExpandAll ?  'FolderOpened' : 'Folder' "  @click="toggleExpandAll">{{  !isExpandAll ? "展开" : "折叠" }}</el-button>
@@ -133,46 +133,3 @@ function toggleExpandAll() {
     <deptDialog ref="DeptDialog" @search="getList()" />
   </div>
 </template>
-
-<style scoped lang="scss">
-.header {
-  display: flex;
-  padding: 16px 16px 0px 16px;
-  margin-bottom: 16px;
-  border-radius: 4px;
-  background: white;
-  box-shadow: 0 0 12px rgb(0 0 0 / 5%);
-}
-
-.footer {
-  flex: 1;
-  display: flex;
-  padding: 16px;
-  flex-direction: column;
-  border-radius: 4px;
-  overflow: hidden;
-  background: white;
-  box-shadow: 0 0 12px rgb(0 0 0 / 5%);
-  position: relative;
-  box-sizing: border-box;
-
-  .util {
-    margin-bottom: 15px;
-    display: flex;
-    flex-shrink: 0;
-  }
-
-  .table-inner {
-    flex: 1;
-    position: relative;
-  }
-
-  .table {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%
-  }
-}
-</style>

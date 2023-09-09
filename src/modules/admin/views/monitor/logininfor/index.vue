@@ -79,7 +79,7 @@ function handleExport() {
 
 <template>
   <div class="app-container">
-    <div class="header">
+    <div class="d-header">
       <el-form :inline="true" :model="searchForm" class="demo-form-inline">
         <el-form-item label="系统模块" prop="title">
           <el-input v-model="searchForm.title" placeholder="请输入系统模块" @keyup.enter="searchTable" />
@@ -108,7 +108,7 @@ function handleExport() {
         </el-form-item>
       </el-form>
     </div>
-    <div class="footer">
+    <div class="d-content">
       <div class="util">
         <el-button type="danger" @click="handlleDelete()" icon="Delete" :disabled="ids.length === 0"
           v-hasPermi="['monitor:operlog:remove']">删除</el-button>
@@ -129,7 +129,6 @@ function handleExport() {
         </el-table-column>
         <el-table-column label="操作人员" align="center" width="110" prop="operName" :show-overflow-tooltip="true"
           sortable="custom" :sort-orders="['descending', 'ascending']" />
-
         <el-table-column prop="operIp" label="主机" align="center" show-overflow-tooltip />
         <el-table-column label="操作状态" align="center">
           <template #default="{ row }">
@@ -154,45 +153,3 @@ function handleExport() {
     <Detail ref="detailDialog" @search="searchTable()" />
   </div>
 </template>
-
-<style scoped lang="scss">
-.header {
-  display: flex;
-  padding: 16px 16px 0px 16px;
-  margin-bottom: 16px;
-  border-radius: 4px;
-  background: white;
-  box-shadow: 0 0 12px rgb(0 0 0 / 5%);
-}
-
-.footer {
-  flex: 1;
-  display: flex;
-  padding: 16px;
-  flex-direction: column;
-  border-radius: 4px;
-  overflow: hidden;
-  background: white;
-  box-shadow: 0 0 12px rgb(0 0 0 / 5%);
-  position: relative;
-  box-sizing: border-box;
-
-  .util {
-    margin-bottom: 15px;
-    display: flex;
-    flex-shrink: 0;
-  }
-
-  .table-inner {
-    flex: 1;
-    position: relative;
-  }
-
-  .table {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%
-  }
-}</style>
