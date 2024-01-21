@@ -2,7 +2,16 @@
 const plugin = require('tailwindcss/plugin')
 
 module.exports = {
-  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  content: [
+    './index.html',
+    './src/**/*.vue',
+    './src/**/*.jsx',
+    './src/**/*.tsx',
+    './page/**/index.html',
+    './page/**/*.vue',
+    './page/**/*.jsx',
+    './page/**/*.tsx',
+  ],
   darkMode: 'class',
   theme: {
     extend: {},
@@ -23,8 +32,6 @@ module.exports = {
           border: '1px solid var(--el-border-color)',
         },
       })
-    })
-  ]
-  // plugins: [require("@tailwindcss/typography")],
+    }),
+  ],
 }
-

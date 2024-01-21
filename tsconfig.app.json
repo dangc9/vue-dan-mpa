@@ -1,0 +1,26 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": [
+    "env.d.ts",
+    "src/**/*.vue",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "page/**/*.tsx",
+    "page/**/*.vue",
+    "page/**/*.ts",
+    "page/**/*.d.ts",
+    "page/**/*.tsx",
+    "config/unplugin"
+  ],
+  "exclude": ["src/**/__tests__/*"],
+  "types": ["element-plus/global"],
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@admin/*": ["./page/admin/*"]
+    }
+  }
+}
